@@ -8,7 +8,7 @@
     (let [content (html/html-snippet (slurp "fake-page.html"))
           body (:body content)
           urls (get-urls-from-body body)]
-      (is (= (count urls) 4)))))
+      (is (= (count urls) 3)))))
 
 (deftest page-not-found
   (testing "Page not found"

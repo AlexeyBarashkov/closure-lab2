@@ -40,6 +40,9 @@
     (html/html-snippet (:body content))
     nil))
 
+(defn create-node [urls depth parent status url]
+  {:urls urls :depth depth :parent parent :children (atom []) :status status :url url})
+
 (defn exec-node [node]
   (if (> (:depth node) 0)
     (doseq [node (pmap
@@ -54,8 +57,7 @@
     node
     ))
 
-(defn create-node [urls depth parent status url]
-  {:urls urls :depth depth :parent parent :children (atom []) :status status :url url})
+
 
 (defn create-root [urls depth]
   (create-node urls depth nil "" ""))
