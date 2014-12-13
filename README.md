@@ -1,14 +1,9 @@
-# lab2
+## lab2
 
-A Clojure library designed to ... well, that part is up to you.
+### Usage
 
-## Usage
+lein run "urls.txt" 3
 
-FIXME
+lein test
 
-## License
 
-Copyright © 2014 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
