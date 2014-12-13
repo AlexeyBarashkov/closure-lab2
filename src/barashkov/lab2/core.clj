@@ -11,12 +11,12 @@
        (catch Exception e {:status 500})))
 
 
-(defn prn-tree
-  [tree]
-  (println (:url tree) " - status: " (:status tree))
-  (let [children @(:children tree)]
+(defn print-tree
+  [root]
+  (println (:url root) " - status: " (:status root))
+  (let [children @(:children root)]
     (if (not (= (count children) 0))
-      (doseq [node children] (if (not (= node nil)) (prn-tree node))))))
+      (doseq [node children] (if (not (= node nil)) (print-tree node))))))
 
 
 
@@ -76,4 +76,4 @@
         depth-number (Integer/parseInt depth)
         tree (get-tree urls depth-number)]
     (println "========== Results: =========")
-    (prn-tree tree)))
+    (print-tree tree)))
