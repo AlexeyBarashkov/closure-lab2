@@ -2,9 +2,7 @@
   (:import (java.net UnknownHostException))
   (:require
     [clj-http.client :as client]
-    [net.cgrand.enlive-html :as html])
-  )
-
+    [net.cgrand.enlive-html :as html]))
 
 
 (defn fetch-url [url]
@@ -18,8 +16,7 @@
   (println (:url tree) " - status: " (:status tree))
   (let [children @(:children tree)]
     (if (not (= (count children) 0))
-      (doseq [node children] (if (not (= node nil)) (prn-tree node)))))
-  )
+      (doseq [node children] (if (not (= node nil)) (prn-tree node))))))
 
 
 
@@ -31,8 +28,7 @@
                 (and (not (clojure.string/blank? href)) (.startsWith href "http://")))
               hrefs)
       )
-    []
-    ))
+    []))
 
 
 (defn get-body [content]
@@ -40,8 +36,10 @@
     (html/html-snippet (:body content))
     nil))
 
+
 (defn create-node [urls depth parent status url]
   {:urls urls :depth depth :parent parent :children (atom []) :status status :url url})
+
 
 (defn exec-node [node]
   (if (> (:depth node) 0)
@@ -54,19 +52,19 @@
                        (swap! (:children node) conj child)
                        child))
                    (:urls node))] (exec-node node))
-    node
-    ))
-
+    node ))
 
 
 (defn create-root [urls depth]
   (create-node urls depth nil "" ""))
+
 
 (defn get-tree
   [urls depth]
   (let [root (create-root urls depth)]
     (exec-node root)
     root))
+
 
 (defn get-urls [path]
   (line-seq (clojure.java.io/reader path)))
